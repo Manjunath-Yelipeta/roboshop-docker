@@ -14,7 +14,7 @@ services:
     frontend:                                                                                                                                                                                                   
       build: ./frontend                                                                                                                                                                                         
       image: frontend:v1                                                                                                                                                                                       
-      container_name: frontend-compose                                                                                                                                                                          
+      container_name: frontend                                                                                                                                                                         
       depends_on:                                                                                                                                                                                               
         - catalogue  
       ports:
