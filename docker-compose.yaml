@@ -4,19 +4,19 @@ services:
         image: mongo:v1                                                                                                                                                                                       
         container_name: mongo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                                                                                                                                                                                                                   
-      catalogue:                                                                                                                                                                                                  
-        build: "./catalogue"                                                                                                                                                                                     
-        container_name: catalogue                                                                                                                                                                                                                                                                                                                                          
-        depends_on:                                                                                                                                                                                               
-          - mongodb                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                  
-      frontend:                                                                                                                                                                                                   
-        build: ./frontend                                                                                                                                                                                         
-        container_name: frontend-compose                                                                                                                                                                          
-        depends_on:                                                                                                                                                                                               
-          - catalogue  
-        ports:
-          - "80:80"
+    catalogue:                                                                                                                                                                                                  
+      build: "./catalogue"                                                                                                                                                                                     
+      container_name: catalogue                                                                                                                                                                                                                                                                                                                                          
+      depends_on:                                                                                                                                                                                               
+        - mongodb                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                
+    frontend:                                                                                                                                                                                                   
+      build: ./frontend                                                                                                                                                                                         
+      container_name: frontend-compose                                                                                                                                                                          
+      depends_on:                                                                                                                                                                                               
+        - catalogue  
+      ports:
+        - "80:80"
 
 networks:
   default:
