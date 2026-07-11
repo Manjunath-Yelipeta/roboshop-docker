@@ -45,7 +45,18 @@ services:
       depends_on:
         - catalogue
         - redis
-                                                                                                                                                                                                               
+
+    shipping:                                                                                                                                                                                                               
+      build: ./shipping
+      image: shipping:v1
+      container_name: shipping
+      environment:
+        CART_ENDPOINT: cart:8080
+        DB_HOST: mysql
+      depends_on:
+        - mysql
+        - cart
+
     frontend:                                                                                                                                                                                                   
       build: ./frontend                                                                                                                                                                                         
       image: frontend:v1                                                                                                                                                                                       
@@ -54,6 +65,7 @@ services:
         - catalogue 
         - user
         - cart
+        - shipping
       ports:
         - "80:80"
 
