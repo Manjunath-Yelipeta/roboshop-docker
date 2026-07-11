@@ -10,13 +10,28 @@ services:
       container_name: catalogue                                                                                                                                                                                                                                                                                                                                          
       depends_on:                                                                                                                                                                                               
         - mongodb                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                
+    user:                                                                                                                                                                                                      
+      build: ./user                                                                                                                                                                                         
+      image: user:v1                                                                                                                                                                                       
+      container_name: user  
+      environment:      
+        MONGO: "true"                                                                                                                                                                       
+        MONGO_URL: "mongo://mongo:27017/user"
+        REDIS_URL: "redis://redis:6379"
+      depends_on:                                                                                                                                                                                               
+        - mongodb  
+        - redis
+    redis:
+      image: redis:v1
+      container_name: redis
+                                                                                                                                                                                                               
     frontend:                                                                                                                                                                                                   
       build: ./frontend                                                                                                                                                                                         
       image: frontend:v1                                                                                                                                                                                       
       container_name: frontend                                                                                                                                                                         
       depends_on:                                                                                                                                                                                               
-        - catalogue  
+        - catalogue 
+        - user
       ports:
         - "80:80"
 
