@@ -61,6 +61,26 @@ services:
       build: ./rabbitmq
       image: rabbitmq:v1
       container_name: rabbitmq
+      environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+
+    payment:
+      build: ./payment
+      image: payment:v1
+      container_name: payment
+      environment:
+        CART_HOST: cart
+        CART_PORT: 8080
+        USER_HOST: user
+        USER_PORT: 8080
+        AMQP_HOST: rabbitmq
+        AMQP_USER: guest
+        AMQP_PASS: guest
+      depends_on:
+        - rabbitmq
+        - user
+        - cart
 
     frontend:                                                                                                                                                                                                   
       build: ./frontend                                                                                                                                                                                         
@@ -71,6 +91,7 @@ services:
         - user
         - cart
         - shipping
+        - payment
       ports:
         - "80:80"
 
