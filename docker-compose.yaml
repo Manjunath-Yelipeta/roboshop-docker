@@ -57,6 +57,11 @@ services:
         - mysql
         - cart
 
+    rabbitmq:
+      build: ./rabbitmq
+      image: rabbitmq:v1
+      container_name: rabbitmq
+
     frontend:                                                                                                                                                                                                   
       build: ./frontend                                                                                                                                                                                         
       image: frontend:v1                                                                                                                                                                                       
