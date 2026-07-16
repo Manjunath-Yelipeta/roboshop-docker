@@ -1,20 +1,20 @@
 services:
     mongodb:                                                                                                                                                                                                    
         build: ./mongo    
-        image: mongo:v1                                                                                                                                                                                       
+        image: mathslogic/mongo:4.0.0                                                                                                                                                                                     
         container_name: mongo 
         volumes:
           - mongodb:/data/db
                                                                                                                                                                                                                   
     catalogue:                                                                                                                                                                                                  
       build: ./catalogue
-      image: catalogue:v1                                                                                                                                                                                       
+      image: mathslogic/catalogue:4.0.0                                                                                                                                                                                      
       container_name: catalogue                                                                                                                                                                                                                                                                                                                                          
       depends_on:                                                                                                                                                                                               
         - mongodb                                                                                                                                                                                                                                                                                                                                                                                        
     user:                                                                                                                                                                                                      
       build: ./user                                                                                                                                                                                         
-      image: user:v1                                                                                                                                                                                       
+      image: mathslogic/user:4.0.0                                                                                                                                                                                     
       container_name: user  
       environment:      
         MONGO: "true"                                                                                                                                                                       
@@ -25,14 +25,14 @@ services:
         - redis
     redis:
       build: ./redis
-      image: redis:v1
+      image: mathslogic/redis:4.0.0
       container_name: redis
       volumes:
         - redis:/data
 
     mysql:
       build: ./mysql
-      image: mysql:v1
+      image: mathslogic/mysql:4.0.0
       container_name: mysql
       environment:
         MYSQL_ROOT_PASSWORD: RoboShop@1
@@ -42,7 +42,7 @@ services:
 
     cart:
       build: ./cart
-      image: cart:v1
+      image: mathslogic/cart:4.0.0
       container_name: cart
       environment:
         CATALOGUE_HOST: catalogue
@@ -54,7 +54,7 @@ services:
 
     shipping:                                                                                                                                                                                                               
       build: ./shipping
-      image: shipping:v1
+      image: mathslogic/shipping:4.0.0
       container_name: shipping
       environment:
         CART_ENDPOINT: cart:8080
@@ -65,7 +65,7 @@ services:
 
     rabbitmq:
       build: ./rabbitmq
-      image: rabbitmq:v1
+      image: mathslogic/rabbitmq:4.0.0
       container_name: rabbitmq
       environment:
         RABBITMQ_DEFAULT_USER: guest
@@ -75,7 +75,7 @@ services:
 
     payment:
       build: ./payment
-      image: payment:v1
+      image: mathslogic/payment:4.0.0
       container_name: payment
       environment:
         CART_HOST: cart
@@ -92,7 +92,7 @@ services:
 
     frontend:                                                                                                                                                                                                   
       build: ./frontend                                                                                                                                                                                         
-      image: frontend:v1                                                                                                                                                                                       
+      image: mathslogic/frontend:4.0.0                                                                                                                                                                                     
       container_name: frontend                                                                                                                                                                         
       depends_on:                                                                                                                                                                                               
         - catalogue 
